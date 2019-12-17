@@ -1,8 +1,12 @@
 FROM golang:alpine as builder
 
-RUN apk --no-cache add git
+RUN apk update && apk upgrade \
+  && apk add --no-cache git
 
-WORKDIR /app/transport-service-vessel
+RUN mkdir /app
+WORKDIR /app
+
+ENV GO111MODULE=on
 
 COPY . .
 
